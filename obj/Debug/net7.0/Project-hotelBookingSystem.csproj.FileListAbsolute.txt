@@ -1,0 +1,15 @@
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\bin\Debug\net7.0\Project-hotelBookingSystem.exe
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\bin\Debug\net7.0\Project-hotelBookingSystem.deps.json
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\bin\Debug\net7.0\Project-hotelBookingSystem.runtimeconfig.json
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\bin\Debug\net7.0\Project-hotelBookingSystem.dll
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\bin\Debug\net7.0\Project-hotelBookingSystem.pdb
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\obj\Debug\net7.0\Project-hotelBookingSystem.csproj.AssemblyReference.cache
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\obj\Debug\net7.0\Project-hotelBookingSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\obj\Debug\net7.0\Project-hotelBookingSystem.AssemblyInfoInputs.cache
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\obj\Debug\net7.0\Project-hotelBookingSystem.AssemblyInfo.cs
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\obj\Debug\net7.0\Project-hotelBookingSystem.csproj.CoreCompileInputs.cache
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\obj\Debug\net7.0\Project-hotelBookingSystem.dll
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\obj\Debug\net7.0\refint\Project-hotelBookingSystem.dll
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\obj\Debug\net7.0\Project-hotelBookingSystem.pdb
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\obj\Debug\net7.0\Project-hotelBookingSystem.genruntimeconfig.cache
+C:\Users\chezka\Documents\GitHub\Project-hotelBookingSystem\obj\Debug\net7.0\ref\Project-hotelBookingSystem.dll
