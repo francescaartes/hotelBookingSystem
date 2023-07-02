@@ -1,81 +1,91 @@
 class Room
 {
-    public int standard = 5;
-    public int deluxe = 3;
-    public int suite = 2;
-    public int standardPrice = 1500;
-    public int deluxePrice = 3000;
-    public int suitePrice = 5000;
-    public string? RoomType { get; set; }
-    public int RoomNum { get; set; }
-    public int RoomPrice { get; set; }
+    public static int standard = 5;
+    public static int deluxe = 3;
+    public static int suite = 1;
+    public static int standardPrice = 1500;
+    public static int deluxePrice = 3000;
+    public static int suitePrice = 5000;
+    public string? Type { get; private set; }
+    public int Number { get; private set; }
+    public int Price { get; private set; }
+    public Room(string roomType, int roomDays)
+    {
+        Type = GetRoomType(roomType);
+        Number = GetRoomNum();
+        Price = GetRoomPrice(roomDays);
+    }
 
-    public void GetRoomType(string roomType)
+    private string GetRoomType(string roomType)
     {
         switch (roomType)
         {
             case "1":
                 standard = standard - 1;
-                RoomType = "Standard";
-                break;
+                return "Standard";
 
             case "2":
                 deluxe = deluxe - 1;
-                RoomType = "Deluxe";
-                break;
+                return "Deluxe";
 
             case "3":
                 suite = suite - 1;
-                RoomType = "Suite";
-                break;
+                return "Suite";
 
             default:
-                RoomType = "";
-                break;
+                return "";
         }
     }
-    public void GetRoomNum()
+    private int GetRoomNum()
     {
         Random random = new Random();
 
-        switch (RoomType)
+        switch (Type)
         {
             case "Standard":
-                RoomNum = random.Next(100, 200);
-                break;
+                return random.Next(100, 200);
 
             case "Deluxe":
-                RoomNum = random.Next(200, 300);
-                break;
+                return random.Next(200, 300);
 
             case "Suite":
-                RoomNum = random.Next(300, 400);
-                break;
+                return random.Next(300, 400);
 
             default:
-                RoomNum = 0;
-                break;
+                return 0;
         }
     }
-    public void GetRoomPrice(int roomDays)
+    private int GetRoomPrice(int roomDays)
     {
-        switch (RoomType)
+        switch (Type)
         {
             case "Standard":
-                RoomPrice = standardPrice * roomDays;
-                break;
+                return standardPrice * roomDays;
 
             case "Deluxe":
-                RoomPrice = deluxePrice * roomDays;
-                break;
+                return deluxePrice * roomDays;
 
             case "Suite":
-                RoomPrice = suitePrice * roomDays;
-                break;
+                return suitePrice * roomDays;
 
             default:
-                RoomPrice = 0;
-                break;
+                return 0;
         }
+    }
+    public static bool CheckRoomAvailability(string roomType)
+    {
+        if (standard == 0 && roomType == "1")
+        {
+            return true;
+        }
+        else if (deluxe == 0 && roomType == "2")
+        {
+            return true;
+        }
+        else if (suite == 0 && roomType == "3")
+        {
+            return true;
+        }
+        else return false;
     }
 }

@@ -1,11 +1,10 @@
-﻿class hotelBookingSystem 
+﻿class HotelBookingSystem
 {
     static void Main()
     {
         Console.WriteLine("Hotel Booking System");
 
         bool run = true;
-        Room room = new Room();
 
         while (run)
         {
@@ -16,8 +15,8 @@
                 case "1":
                     System.Console.Write("\nEnter your name: ");
                     string? userName = Console.ReadLine();
-                                        
-                    DisplayRooms(room.standardPrice, room.deluxePrice, room.suitePrice);
+                           
+                    DisplayRooms(Room.standardPrice, Room.deluxePrice, Room.suitePrice);
 
                     bool selectRoom = true;
                     while (selectRoom)
@@ -30,24 +29,18 @@
                             System.Console.WriteLine("\nInvalid room type! Please try again.");
                             continue;
                         }
-                        else if (room.standard == 0 && roomType == "1")
+
+                        bool roomAvailable = Room.CheckRoomAvailability(roomType);
+
+                        if (roomAvailable)
                         {
-                            System.Console.WriteLine("\nSorry, there are no more standard rooms available.");
-                            continue;
-                        }
-                        else if (room.deluxe == 0 && roomType == "2")
-                        {
-                            System.Console.WriteLine("\nSorry, there are no more deluxe rooms available.");
-                            continue;
-                        }
-                        else if (room.suite == 0 && roomType == "3")
-                        {
-                            System.Console.WriteLine("\nSorry, there are no more suites available.");
+                            System.Console.WriteLine("\n\tSorry, your desired room type is not available");
                             continue;
                         }
                         else
                         {
                             selectRoom = false;
+                            
                             System.Console.Write("Enter the date of check-in (MM/DD/YYYY): ");
                             DateTime checkIn = CheckDateFormat();
                             System.Console.Write("Enter the date of check-out (MM/DD/YYYY): ");
@@ -59,13 +52,7 @@
                             DateOnly checkInDate = DateOnly.FromDateTime(checkIn);
                             DateOnly checkOutDate = DateOnly.FromDateTime(checkOut);
                             
-                            room.GetRoomType(roomType);
-                            room.GetRoomNum();
-                            room.GetRoomPrice(roomDays);
-
-                            roomType = room.RoomType;
-                            int roomNumber = room.RoomNum;
-                            int totalPrice = room.RoomPrice;
+                            Room room = new Room(roomType, roomDays);
 
                             System.Console.Write("\nDo you want to confirm your booking? (Y/N) - ");
                             string? confrm = Console.ReadLine().ToUpper();
@@ -75,15 +62,15 @@
                                 System.Console.WriteLine("\n\t                  THE SYNTAX HOTEL                ");
                                 System.Console.WriteLine("\t+================================================+");
                                 System.Console.WriteLine($"\t    Name          :  {userName}");
-                                System.Console.WriteLine($"\t    Date          :  {checkInDate} - {checkOutDate}");
-                                System.Console.WriteLine($"\t    Room Type     :  {room.RoomType}");
-                                System.Console.WriteLine($"\t    Room No.      :  {room.RoomNum}");
-                                System.Console.WriteLine($"\t    Total Price   :  P{room.RoomPrice}");
+                                System.Console.WriteLine($"\t    Date          :  {checkInDate:MM/dd/yyyy} - {checkOutDate:MM/dd/yyyy}");
+                                System.Console.WriteLine($"\t    Room Type     :  {room.Type}");
+                                System.Console.WriteLine($"\t    Room No.      :  {room.Number}");
+                                System.Console.WriteLine($"\t    Total Price   :  P{room.Price}");
                                 System.Console.WriteLine("\t+================================================+");
                                 System.Console.WriteLine("\nBooking confirmed! Thank you!\n");
                                 
-                                Booking booking = new Booking();
-                                booking.AddBooking(userName, room.RoomType, checkInDate, checkOutDate, room.RoomNum, room.RoomPrice);
+                                Booking booking = new Booking(userName, room.Type, checkInDate, checkOutDate, room.Number, room.Price);
+                                booking.AddBooking();
                             }
                             else break;
                         }
@@ -91,7 +78,7 @@
                     break;
 
                 case "2":
-                    DisplayRooms(room.standardPrice, room.deluxePrice, room.suitePrice);
+                    DisplayRooms(Room.standardPrice, Room.deluxePrice, Room.suitePrice);
                     break;
 
                 case "3":
@@ -154,16 +141,16 @@
     private static void DisplayBookings()
     {
         System.Console.WriteLine();
-        if (Booking.bookings.Count == 0) System.Console.WriteLine("There are no bookings yet!");
+        if (Booking.bookings.Count == 0) System.Console.WriteLine("\tThere are no bookings yet!");
         foreach (Booking booking in Booking.bookings)
         {
-            System.Console.WriteLine();
-            System.Console.WriteLine($"Name: {booking.Name}");
-            System.Console.WriteLine($"Check-in Date: {booking.CheckInDate}");
-            System.Console.WriteLine($"Check-out Date: {booking.CheckOutDate}");
-            System.Console.WriteLine($"Room Type: {booking.RoomType}");
-            System.Console.WriteLine($"Room Number: {booking.RoomNumber}");
-            System.Console.WriteLine($"Total Price: P{booking.TotalPrice}");
+            System.Console.WriteLine("\t+-------------------------------+");
+            System.Console.WriteLine($"\t   Name: {booking.Name}");
+            System.Console.WriteLine($"\t   Check-in Date: {booking.CheckInDate:MM/dd/yyyy}");
+            System.Console.WriteLine($"\t   Check-out Date: {booking.CheckOutDate:MM/dd/yyyy}");
+            System.Console.WriteLine($"\t   Room Type: {booking.RoomType}");
+            System.Console.WriteLine($"\t   Room Number: {booking.RoomNumber}");
+            System.Console.WriteLine($"\t   Total Price: P{booking.TotalPrice}");
         }
     }
 }
