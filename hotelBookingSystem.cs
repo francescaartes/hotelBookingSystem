@@ -5,7 +5,9 @@
         Console.WriteLine("Hotel Booking System");
 
         bool run = true;
-
+        
+        Booking booking = new Booking();
+        
         while (run)
         {
             string? menu = HotelMenu();
@@ -69,8 +71,8 @@
                                 System.Console.WriteLine("\t+================================================+");
                                 System.Console.WriteLine("\nBooking confirmed! Thank you!\n");
                                 
-                                Booking booking = new Booking(userName, room.Type, checkInDate, checkOutDate, room.Number, room.Price);
-                                booking.AddBooking();
+                                
+                                booking.AddBooking(userName, room.Type, checkInDate, checkOutDate, room.Number, room.Price);
                             }
                             else break;
                         }
@@ -83,6 +85,16 @@
 
                 case "3":
                     DisplayBookings();
+                    break;
+                
+                case "4":
+                    System.Console.Write("\nEnter the booking name: ");
+                    string? bookingName = Console.ReadLine();
+
+                    bool bookCancel = booking.CancelBooking(bookingName);
+
+                    if (bookCancel) System.Console.WriteLine("\n\tBooking cancelled successfully!");
+                    else System.Console.WriteLine("\n\tBooking not found! Cancel failed.");
                     break;
 
                 case "0":
@@ -104,6 +116,7 @@
         Console.WriteLine("1. Book a hotel room");
         Console.WriteLine("2. View hotel room prices");
         Console.WriteLine("3. View bookings");
+        Console.WriteLine("4. Cancel booking");
         Console.WriteLine("0. Exit");
         System.Console.Write("Enter the number: ");
         return userChoice = Console.ReadLine();

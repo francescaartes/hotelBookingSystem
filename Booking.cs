@@ -8,18 +8,30 @@ class Booking
     public int TotalPrice { get; private set; }
     public static List<Booking> bookings = new List<Booking>();
 
-    public Booking(string? userName, string? roomType, DateOnly checkInDate, DateOnly checkOutDate, int roomNum, int roomPrice)
+    public void AddBooking(string? userName, string? roomType, DateOnly checkInDate, DateOnly checkOutDate, int roomNum, int roomPrice)
     {
-        Name = userName;
-        CheckInDate = checkInDate;
-        CheckOutDate = checkOutDate;
-        RoomType = roomType;
-        RoomNumber = roomNum;
-        TotalPrice = roomPrice;
+        Booking booking = new Booking
+        {
+            Name = userName,
+            CheckInDate = checkInDate,
+            CheckOutDate = checkOutDate,
+            RoomType = roomType,
+            RoomNumber = roomNum,
+            TotalPrice = roomPrice,
+        };
+        bookings.Add(booking);
     }
 
-    public void AddBooking()
+    public bool CancelBooking(string bookingName)
     {
-        bookings.Add(this);
+        foreach (Booking booking in bookings)
+        {
+            if (bookingName == booking.Name) 
+            {
+                bookings.Remove(booking);
+                return true;
+            }
+        }
+        return false;
     }
 }
