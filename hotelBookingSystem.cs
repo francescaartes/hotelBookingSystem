@@ -5,20 +5,20 @@
         Console.WriteLine("Hotel Booking System");
 
         bool run = true;
-        
+
         Booking booking = new Booking();
-        
+
         while (run)
         {
             string? menu = HotelMenu();
-            
+
             switch (menu)
             {
                 case "1":
                     System.Console.Write("\nEnter your name: ");
                     string? userName = Console.ReadLine();
-                           
-                    DisplayRooms(Room.standardPrice, Room.deluxePrice, Room.suitePrice);
+
+                    DisplayRooms(StandardRoom.standardPrice, DeluxeRoom.deluxePrice, SuiteRoom.suitePrice);
 
                     bool selectRoom = true;
                     while (selectRoom)
@@ -42,7 +42,7 @@
                         else
                         {
                             selectRoom = false;
-                            
+
                             System.Console.Write("Enter the date of check-in (MM/DD/YYYY): ");
                             DateTime checkIn = CheckDateFormat();
                             System.Console.Write("Enter the date of check-out (MM/DD/YYYY): ");
@@ -53,14 +53,30 @@
 
                             DateOnly checkInDate = DateOnly.FromDateTime(checkIn);
                             DateOnly checkOutDate = DateOnly.FromDateTime(checkOut);
-                            
-                            Room room = new Room(roomType, roomDays);
+
+                            Room room;
 
                             System.Console.Write("\nDo you want to confirm your booking? (Y/N) - ");
                             string? confrm = Console.ReadLine().ToUpper();
-                            
-                            if (confrm == "Y") 
+
+                            if (confrm == "Y")
                             {
+                                switch (roomType)
+                                {
+                                    case "1":
+                                        room = new StandardRoom(roomType, roomDays);
+                                        break;
+                                    case "2":
+                                        room = new DeluxeRoom(roomType, roomDays);
+                                        break;
+                                    case "3":
+                                        room = new SuiteRoom(roomType, roomDays);
+                                        break;
+                                    default:
+                                        System.Console.WriteLine("\nInvalid room type! Please try again.");
+                                        continue;
+                                }
+                                
                                 System.Console.WriteLine("\n\t                  THE SYNTAX HOTEL                ");
                                 System.Console.WriteLine("\t+================================================+");
                                 System.Console.WriteLine($"\t    Name          :  {userName}");
@@ -70,8 +86,8 @@
                                 System.Console.WriteLine($"\t    Total Price   :  P{room.Price}");
                                 System.Console.WriteLine("\t+================================================+");
                                 System.Console.WriteLine("\nBooking confirmed! Thank you!\n");
-                                
-                                
+
+
                                 booking.AddBooking(userName, room.Type, checkInDate, checkOutDate, room.Number, room.Price);
                             }
                             else break;
@@ -80,13 +96,13 @@
                     break;
 
                 case "2":
-                    DisplayRooms(Room.standardPrice, Room.deluxePrice, Room.suitePrice);
+                    DisplayRooms(StandardRoom.standardPrice, DeluxeRoom.deluxePrice, SuiteRoom.suitePrice);
                     break;
 
                 case "3":
                     DisplayBookings();
                     break;
-                
+
                 case "4":
                     System.Console.Write("\nEnter the booking name: ");
                     string? bookingName = Console.ReadLine();
@@ -120,7 +136,7 @@
         Console.WriteLine("0. Exit");
         System.Console.Write("Enter the number: ");
         return userChoice = Console.ReadLine();
-        
+
     }
     private static void DisplayRooms(int standardPrice, int deluxePrice, int suitePrice)
     {
@@ -142,7 +158,7 @@
         {
             try
             {
-                DateTime date = DateTime.ParseExact(Console.ReadLine(), "MM/dd/yyyy", null );
+                DateTime date = DateTime.ParseExact(Console.ReadLine(), "MM/dd/yyyy", null);
                 return date;
             }
             catch (FormatException)

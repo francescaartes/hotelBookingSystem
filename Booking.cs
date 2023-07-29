@@ -26,9 +26,21 @@ class Booking
     {
         foreach (Booking booking in bookings)
         {
-            if (bookingName == booking.Name) 
+            if (bookingName == booking.Name)
             {
                 bookings.Remove(booking);
+                if (booking.RoomType == "Standard")
+                {
+                    StandardRoom.availableStandard++;
+                }
+                else if (booking.RoomType == "Deluxe")
+                {
+                    DeluxeRoom.availableDeluxe++;
+                }
+                else if (booking.RoomType == "Suite")
+                {
+                    SuiteRoom.availableSuite++;
+                }
                 return true;
             }
         }
